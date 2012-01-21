@@ -76,6 +76,7 @@
   <ItemGroup>
     <Compile Include="Models\Computer.vb" />
     <Compile Include="Models\GameIndex.vb" />
+    <Compile Include="Models\GameState.vb" />
     <Compile Include="Models\TicTacToe.vb" />
     <Compile Include="Models\Game.vb" />
     <Compile Include="Models\Human.vb" />

@@ -30,7 +30,7 @@ Namespace TicTacToe.Specs.Steps
         Public Sub GivenIHaveANewGame()
             ScenarioContext.Current.Get(Of Game)("game").Opponent = New Computer
             ScenarioContext.Current.Get(Of Game)("game").Start()
-            ScenarioContext.Current.Get(Of Game)("game").State.Should.Be("Game Started")
+            ScenarioContext.Current.Get(Of Game)("game").State.Should.Be(App.Models.GameState.Created)
         End Sub
 
         <[Given]("it is my turn")> _
@@ -38,6 +38,11 @@ Namespace TicTacToe.Specs.Steps
             GivenIHaveANewGame()
             WhenISelectToGo("first")
             ScenarioContext.Current.Get(Of Game)("game").Invoker.Should.Be(ScenarioContext.Current.Get(Of Player)("protagonist"))
+        End Sub
+
+        <[Given]("no indeces are marked")> _
+        Public Sub GivenNoIndecesAreMarked()
+            CType(ScenarioContext.Current.Get(Of Game)("game").GameBoard, GameIndex()).Where(Function(index) index IsNot Nothing).Count.Should.Be(0)
         End Sub
 
         <[When]("I press start")> _
@@ -55,9 +60,18 @@ Namespace TicTacToe.Specs.Steps
             ScenarioContext.Current.Get(Of Game)("game").Mark(index)
         End Sub
 
-        <[Then]("the result should be (.*) on the screen")> _
-        Public Sub ThenTheResultShouldBe(ByVal result As String)
-            ScenarioContext.Current.Get(Of Game)("game").State.Should.Be(result)
+        <[Then]("the gamestate should be (.*)")> _
+        Public Sub ThenTheGameStateShouldBe(ByVal result As String)
+            Select Case result
+                Case "Created"
+                    ScenarioContext.Current.Get(Of Game)("game").State.Should.Be(GameState.Created)
+                Case "In Progress"
+                    ScenarioContext.Current.Get(Of Game)("game").State.Should.Be(GameState.InProgress)
+                Case "Finished"
+                    ScenarioContext.Current.Get(Of Game)("game").State.Should.Be(GameState.Finished)
+                Case Else
+                    ScenarioContext.Current.Pending()
+            End Select
         End Sub
 
         <[Then]("the result should be my turn")> _
@@ -77,7 +91,7 @@ Namespace TicTacToe.Specs.Steps
 
         <[Then]("the date of index (.*) should be (.*)")> _
         Public Sub ThenTheDateOfIndexShouldBe(ByVal index As Integer, ByVal day As Date)
-            CType(ScenarioContext.Current.Get(Of Game)("game").GameBoard(index), GameIndex).Time.Should.Be(day)
+            CType(ScenarioContext.Current.Get(Of Game)("game").GameBoard(index), GameIndex).DateTimeStamp.Date.Should.Be(day)
         End Sub
 
         <[Then]("the player of index (.*) should be me")> _

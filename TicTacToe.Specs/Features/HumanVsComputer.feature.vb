@@ -71,7 +71,7 @@ Me.ScenarioSetup(scenarioInfo)
  testRunner.When("I press start")
 #End ExternalSource
 #ExternalSource("HumanVsComputer.feature",9)
- testRunner.Then("the result should be Game Started on the screen")
+ testRunner.Then("the gamestate should be Created")
 #End ExternalSource
             Me.ScenarioCleanup
         End Sub
@@ -115,9 +115,9 @@ Me.ScenarioSetup(scenarioInfo)
         End Sub
         
         <NUnit.Framework.TestAttribute(),  _
-         NUnit.Framework.DescriptionAttribute("My first Move")>  _
-        Public Overridable Sub MyFirstMove()
-            Dim scenarioInfo As TechTalk.SpecFlow.ScenarioInfo = New TechTalk.SpecFlow.ScenarioInfo("My first Move", CType(Nothing,String()))
+         NUnit.Framework.DescriptionAttribute("I move first")>  _
+        Public Overridable Sub IMoveFirst()
+            Dim scenarioInfo As TechTalk.SpecFlow.ScenarioInfo = New TechTalk.SpecFlow.ScenarioInfo("I move first", CType(Nothing,String()))
 #ExternalSource("HumanVsComputer.feature",21)
 Me.ScenarioSetup(scenarioInfo)
 #End ExternalSource
@@ -125,18 +125,21 @@ Me.ScenarioSetup(scenarioInfo)
  testRunner.Given("it is my turn")
 #End ExternalSource
 #ExternalSource("HumanVsComputer.feature",23)
- testRunner.When("index 1 is marked")
+ testRunner.And("no indeces are marked")
 #End ExternalSource
 #ExternalSource("HumanVsComputer.feature",24)
- testRunner.Then("the value of index 1 should be X")
+ testRunner.When("index 1 is marked")
 #End ExternalSource
 #ExternalSource("HumanVsComputer.feature",25)
- testRunner.And("the date of index 1 should be 1/21/2012")
+ testRunner.Then("the value of index 1 should be X")
 #End ExternalSource
 #ExternalSource("HumanVsComputer.feature",26)
- testRunner.And("the player of index 1 should be me")
+ testRunner.And("the date of index 1 should be 1/21/2012")
 #End ExternalSource
 #ExternalSource("HumanVsComputer.feature",27)
+ testRunner.And("the player of index 1 should be me")
+#End ExternalSource
+#ExternalSource("HumanVsComputer.feature",28)
  testRunner.And("the invoker should be the opponent")
 #End ExternalSource
             Me.ScenarioCleanup

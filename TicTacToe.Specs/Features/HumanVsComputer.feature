@@ -6,7 +6,7 @@
 Scenario: Start Game
 	Given I have selected a computer opponent
 	When I press start
-	Then the result should be Game Started on the screen
+	Then the gamestate should be Created
 
 Scenario: Go First
 	Given I have a new game
@@ -18,8 +18,9 @@ Scenario: Go Last
 	When I select to go second
 	Then the result should be the other player's turn
 
-Scenario: My first Move
+Scenario: I move first
 	Given it is my turn
+	And no indeces are marked
 	When index 1 is marked
 	Then the value of index 1 should be X
 	And the date of index 1 should be 1/21/2012

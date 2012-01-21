@@ -4,9 +4,8 @@ Namespace TicTacToe.App.Models
 
         Property Name As String
         Property Opponent As Player
-        ReadOnly Property State As String
+        ReadOnly Property State As [Enum]
         ReadOnly Property Invoker As Player
-
         ReadOnly Property GameBoard As Array
 
         Sub Start()
