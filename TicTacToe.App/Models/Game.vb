@@ -4,6 +4,7 @@ Namespace TicTacToe.App.Models
 
         Property Opponent As Player
         Property State As String
+        Property Invoker As Player
 
         Sub Start()
 

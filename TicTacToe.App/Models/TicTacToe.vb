@@ -5,6 +5,7 @@ Namespace TicTacToe.App.Models
 
         Property Opponent As Player Implements Game.Opponent
         Property State As String Implements Game.State
+        Property Invoker As Player Implements Game.Invoker
 
         Sub Start() Implements Game.Start
             State = "Game Started"

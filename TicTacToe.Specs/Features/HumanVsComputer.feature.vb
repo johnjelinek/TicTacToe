@@ -75,6 +75,44 @@ Me.ScenarioSetup(scenarioInfo)
 #End ExternalSource
             Me.ScenarioCleanup
         End Sub
+        
+        <NUnit.Framework.TestAttribute(),  _
+         NUnit.Framework.DescriptionAttribute("Go First")>  _
+        Public Overridable Sub GoFirst()
+            Dim scenarioInfo As TechTalk.SpecFlow.ScenarioInfo = New TechTalk.SpecFlow.ScenarioInfo("Go First", CType(Nothing,String()))
+#ExternalSource("HumanVsComputer.feature",11)
+Me.ScenarioSetup(scenarioInfo)
+#End ExternalSource
+#ExternalSource("HumanVsComputer.feature",12)
+ testRunner.Given("I have a new game")
+#End ExternalSource
+#ExternalSource("HumanVsComputer.feature",13)
+ testRunner.When("I select to go first")
+#End ExternalSource
+#ExternalSource("HumanVsComputer.feature",14)
+ testRunner.Then("the result should be my turn")
+#End ExternalSource
+            Me.ScenarioCleanup
+        End Sub
+        
+        <NUnit.Framework.TestAttribute(),  _
+         NUnit.Framework.DescriptionAttribute("Go Last")>  _
+        Public Overridable Sub GoLast()
+            Dim scenarioInfo As TechTalk.SpecFlow.ScenarioInfo = New TechTalk.SpecFlow.ScenarioInfo("Go Last", CType(Nothing,String()))
+#ExternalSource("HumanVsComputer.feature",16)
+Me.ScenarioSetup(scenarioInfo)
+#End ExternalSource
+#ExternalSource("HumanVsComputer.feature",17)
+ testRunner.Given("I have a new game")
+#End ExternalSource
+#ExternalSource("HumanVsComputer.feature",18)
+ testRunner.When("I select to go second")
+#End ExternalSource
+#ExternalSource("HumanVsComputer.feature",19)
+ testRunner.Then("the result should be the other player's turn")
+#End ExternalSource
+            Me.ScenarioCleanup
+        End Sub
     End Class
 End Namespace
 '#pragma warning restore
