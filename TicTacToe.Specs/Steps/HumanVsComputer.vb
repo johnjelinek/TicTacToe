@@ -33,6 +33,13 @@ Namespace TicTacToe.Specs.Steps
             ScenarioContext.Current.Get(Of Game)("game").State.Should.Be("Game Started")
         End Sub
 
+        <[Given]("it is my turn")> _
+        Public Sub GivenItIsMyTurn()
+            GivenIHaveANewGame()
+            WhenISelectToGo("first")
+            ScenarioContext.Current.Get(Of Game)("game").Invoker.Should.Be(ScenarioContext.Current.Get(Of Player)("protagonist"))
+        End Sub
+
         <[When]("I press start")> _
         Public Sub WhenIPressStart()
             ScenarioContext.Current.Get(Of Game)("game").Start()
@@ -40,12 +47,12 @@ Namespace TicTacToe.Specs.Steps
 
         <[When]("I select to go (.*)")> _
         Public Sub WhenISelectToGo(ByVal turn As String)
-            Select Case turn
-                Case "first"
-                    ScenarioContext.Current.Get(Of Game)("game").Invoker = ScenarioContext.Current.Get(Of Player)("protagonist")
-                Case Else
-                    ScenarioContext.Current.Get(Of Game)("game").Invoker = ScenarioContext.Current.Get(Of Game)("game").Opponent
-            End Select
+            ScenarioContext.Current.Get(Of Game)("game").Start(turn, ScenarioContext.Current.Get(Of Player)("protagonist"))
+        End Sub
+
+        <[When]("index (.*) is marked")> _
+        Public Sub WhenIndexIsMarked(ByVal index As Integer)
+            ScenarioContext.Current.Get(Of Game)("game").Mark(index)
         End Sub
 
         <[Then]("the result should be (.*) on the screen")> _
@@ -62,6 +69,27 @@ Namespace TicTacToe.Specs.Steps
         Public Sub ThenTheResultShouldBeTheOtherPlayersTurn()
             ScenarioContext.Current.Get(Of Game)("game").Invoker.Should.Be(ScenarioContext.Current.Get(Of Game)("game").Opponent)
         End Sub
+
+        <[Then]("the value of index (.*) should be (.*)")> _
+        Public Sub ThenTheValueOfIndexShouldBe(ByVal index As Integer, ByVal value As Char)
+            CType(ScenarioContext.Current.Get(Of Game)("game").GameBoard(index), GameIndex).Value.Should.Be(value)
+        End Sub
+
+        <[Then]("the date of index (.*) should be (.*)")> _
+        Public Sub ThenTheDateOfIndexShouldBe(ByVal index As Integer, ByVal day As Date)
+            CType(ScenarioContext.Current.Get(Of Game)("game").GameBoard(index), GameIndex).Time.Should.Be(day)
+        End Sub
+
+        <[Then]("the player of index (.*) should be me")> _
+        Public Sub ThenThePlayerOfIndexShouldBeMe(ByVal index As Integer)
+            CType(ScenarioContext.Current.Get(Of Game)("game").GameBoard(index), GameIndex).Player.Should.Be(ScenarioContext.Current.Get(Of Player)("protagonist"))
+        End Sub
+
+        <[Then]("the invoker should be the opponent")> _
+        Public Sub ThenTheInvokerShouldBeTheOpponent()
+            ScenarioContext.Current.Get(Of Game)("game").Invoker.Should.Be(ScenarioContext.Current.Get(Of Game)("game").Opponent)
+        End Sub
+
 
     End Class
 
