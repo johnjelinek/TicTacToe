@@ -2,8 +2,10 @@
 Namespace TicTacToe.App.Models
     Public Interface Game
 
+        Property Name As String
         Property Opponent As Player
-        Property State As String
+        ReadOnly Property State As String
+
         Property Invoker As Player
 
         Sub Start()

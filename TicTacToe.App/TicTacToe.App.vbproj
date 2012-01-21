@@ -9,7 +9,7 @@
     </SchemaVersion>
     <ProjectGuid>{27E7FF61-A664-470E-8841-C5FF0171F710}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <StartupObject>Module1</StartupObject>
+    <StartupObject>Application</StartupObject>
     <RootNamespace>
     </RootNamespace>
     <AssemblyName>TicTacToe.App</AssemblyName>
@@ -79,7 +79,7 @@
     <Compile Include="Models\Game.vb" />
     <Compile Include="Models\Human.vb" />
     <Compile Include="Models\Player.vb" />
-    <Compile Include="Module1.vb" />
+    <Compile Include="Application.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
