@@ -10,39 +10,37 @@ Namespace TicTacToe.Specs.Steps
 
     <Binding()> _
     Public Class HumanVsComputer
-        <BeforeScenario()> _
-        Public Sub BeforeScenario()
-            ScenarioContext.Current.Add("game", New App.Models.TicTacToe)
-            ScenarioContext.Current.Add("protagonist", New Human)
-        End Sub
 
         <[Given]("I have selected a (.*) opponent")> _
         Public Sub GivenIHaveSelectedAnOpponent(ByVal opponent As String)
             Select Case opponent
                 Case "computer"
-                    ScenarioContext.Current.Get(Of Game)("game").Opponent = New Computer
+                    ScenarioContext.Current.Add("antagonist", New Computer)
                 Case Else
-                    ScenarioContext.Current.Get(Of Game)("game").Opponent = New Human
+                    ScenarioContext.Current.Add("antagonist", New Human)
             End Select
+            ScenarioContext.Current.Get(Of Game)("game").SelectOpponent(ScenarioContext.Current.Get(Of Player)("antagonist"))
         End Sub
 
         <[Given]("I have a new game")> _
         Public Sub GivenIHaveANewGame()
-            ScenarioContext.Current.Get(Of Game)("game").Opponent = New Computer
-            ScenarioContext.Current.Get(Of Game)("game").Start()
-            ScenarioContext.Current.Get(Of Game)("game").State.Should.Be(App.Models.GameState.Created)
+            ScenarioContext.Current("game") = New App.Models.TicTacToe
+            ScenarioContext.Current("protagonist") = New Human
         End Sub
 
         <[Given]("it is my turn")> _
         Public Sub GivenItIsMyTurn()
-            GivenIHaveANewGame()
-            WhenISelectToGo("first")
             ScenarioContext.Current.Get(Of Game)("game").Invoker.Should.Be(ScenarioContext.Current.Get(Of Player)("protagonist"))
         End Sub
 
         <[Given]("no indeces are marked")> _
         Public Sub GivenNoIndecesAreMarked()
             CType(ScenarioContext.Current.Get(Of Game)("game").GameBoard, GameIndex()).Where(Function(index) index IsNot Nothing).Count.Should.Be(0)
+        End Sub
+
+        <[Given]("I selected to go (.*)")> _
+        Public Sub GivenISelectedToGo(ByVal turn As String)
+            WhenISelectToGo("first")
         End Sub
 
         <[When]("I press start")> _
@@ -52,12 +50,18 @@ Namespace TicTacToe.Specs.Steps
 
         <[When]("I select to go (.*)")> _
         Public Sub WhenISelectToGo(ByVal turn As String)
-            ScenarioContext.Current.Get(Of Game)("game").Start(turn, ScenarioContext.Current.Get(Of Player)("protagonist"))
+            Select Case turn
+                Case "first"
+                    ScenarioContext.Current.Get(Of Game)("game").SwitchPlayers(ScenarioContext.Current.Get(Of Player)("protagonist"))
+                Case Else
+                    ScenarioContext.Current.Get(Of Game)("game").SwitchPlayers(ScenarioContext.Current.Get(Of Player)("antagonist"))
+            End Select
         End Sub
 
         <[When]("index (.*) is marked")> _
         Public Sub WhenIndexIsMarked(ByVal index As Integer)
             ScenarioContext.Current.Get(Of Game)("game").Mark(index)
+            ScenarioContext.Current.Get(Of Game)("game").SwitchPlayers()
         End Sub
 
         <[Then]("the gamestate should be (.*)")> _
@@ -81,7 +85,7 @@ Namespace TicTacToe.Specs.Steps
 
         <[Then]("the result should be the other player's turn")> _
         Public Sub ThenTheResultShouldBeTheOtherPlayersTurn()
-            ScenarioContext.Current.Get(Of Game)("game").Invoker.Should.Be(ScenarioContext.Current.Get(Of Game)("game").Opponent)
+            ScenarioContext.Current.Get(Of Game)("game").Invoker.Should.Be(ScenarioContext.Current.Get(Of Player)("antagonist"))
         End Sub
 
         <[Then]("the value of index (.*) should be (.*)")> _
@@ -101,9 +105,8 @@ Namespace TicTacToe.Specs.Steps
 
         <[Then]("the invoker should be the opponent")> _
         Public Sub ThenTheInvokerShouldBeTheOpponent()
-            ScenarioContext.Current.Get(Of Game)("game").Invoker.Should.Be(ScenarioContext.Current.Get(Of Game)("game").Opponent)
+            ScenarioContext.Current.Get(Of Game)("game").Invoker.Should.Be(ScenarioContext.Current.Get(Of Player)("antagonist"))
         End Sub
-
 
     End Class
 

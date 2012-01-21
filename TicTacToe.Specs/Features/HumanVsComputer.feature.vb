@@ -65,12 +65,15 @@ Namespace SpecFlow.GeneratedTests
 Me.ScenarioSetup(scenarioInfo)
 #End ExternalSource
 #ExternalSource("HumanVsComputer.feature",7)
- testRunner.Given("I have selected a computer opponent")
+ testRunner.Given("I have a new game")
 #End ExternalSource
 #ExternalSource("HumanVsComputer.feature",8)
- testRunner.When("I press start")
+ testRunner.And("I have selected a computer opponent")
 #End ExternalSource
 #ExternalSource("HumanVsComputer.feature",9)
+ testRunner.When("I press start")
+#End ExternalSource
+#ExternalSource("HumanVsComputer.feature",10)
  testRunner.Then("the gamestate should be Created")
 #End ExternalSource
             Me.ScenarioCleanup
@@ -80,16 +83,19 @@ Me.ScenarioSetup(scenarioInfo)
          NUnit.Framework.DescriptionAttribute("Go First")>  _
         Public Overridable Sub GoFirst()
             Dim scenarioInfo As TechTalk.SpecFlow.ScenarioInfo = New TechTalk.SpecFlow.ScenarioInfo("Go First", CType(Nothing,String()))
-#ExternalSource("HumanVsComputer.feature",11)
+#ExternalSource("HumanVsComputer.feature",12)
 Me.ScenarioSetup(scenarioInfo)
 #End ExternalSource
-#ExternalSource("HumanVsComputer.feature",12)
+#ExternalSource("HumanVsComputer.feature",13)
  testRunner.Given("I have a new game")
 #End ExternalSource
-#ExternalSource("HumanVsComputer.feature",13)
+#ExternalSource("HumanVsComputer.feature",14)
+ testRunner.And("I have selected a computer opponent")
+#End ExternalSource
+#ExternalSource("HumanVsComputer.feature",15)
  testRunner.When("I select to go first")
 #End ExternalSource
-#ExternalSource("HumanVsComputer.feature",14)
+#ExternalSource("HumanVsComputer.feature",16)
  testRunner.Then("the result should be my turn")
 #End ExternalSource
             Me.ScenarioCleanup
@@ -99,47 +105,59 @@ Me.ScenarioSetup(scenarioInfo)
          NUnit.Framework.DescriptionAttribute("Go Last")>  _
         Public Overridable Sub GoLast()
             Dim scenarioInfo As TechTalk.SpecFlow.ScenarioInfo = New TechTalk.SpecFlow.ScenarioInfo("Go Last", CType(Nothing,String()))
-#ExternalSource("HumanVsComputer.feature",16)
+#ExternalSource("HumanVsComputer.feature",18)
 Me.ScenarioSetup(scenarioInfo)
 #End ExternalSource
-#ExternalSource("HumanVsComputer.feature",17)
+#ExternalSource("HumanVsComputer.feature",19)
  testRunner.Given("I have a new game")
 #End ExternalSource
-#ExternalSource("HumanVsComputer.feature",18)
+#ExternalSource("HumanVsComputer.feature",20)
+ testRunner.And("I have selected a computer opponent")
+#End ExternalSource
+#ExternalSource("HumanVsComputer.feature",21)
  testRunner.When("I select to go second")
 #End ExternalSource
-#ExternalSource("HumanVsComputer.feature",19)
+#ExternalSource("HumanVsComputer.feature",22)
  testRunner.Then("the result should be the other player's turn")
 #End ExternalSource
             Me.ScenarioCleanup
         End Sub
         
         <NUnit.Framework.TestAttribute(),  _
-         NUnit.Framework.DescriptionAttribute("I move first")>  _
-        Public Overridable Sub IMoveFirst()
-            Dim scenarioInfo As TechTalk.SpecFlow.ScenarioInfo = New TechTalk.SpecFlow.ScenarioInfo("I move first", CType(Nothing,String()))
-#ExternalSource("HumanVsComputer.feature",21)
+         NUnit.Framework.DescriptionAttribute("I make a mark")>  _
+        Public Overridable Sub IMakeAMark()
+            Dim scenarioInfo As TechTalk.SpecFlow.ScenarioInfo = New TechTalk.SpecFlow.ScenarioInfo("I make a mark", CType(Nothing,String()))
+#ExternalSource("HumanVsComputer.feature",24)
 Me.ScenarioSetup(scenarioInfo)
 #End ExternalSource
-#ExternalSource("HumanVsComputer.feature",22)
- testRunner.Given("it is my turn")
-#End ExternalSource
-#ExternalSource("HumanVsComputer.feature",23)
- testRunner.And("no indeces are marked")
-#End ExternalSource
-#ExternalSource("HumanVsComputer.feature",24)
- testRunner.When("index 1 is marked")
-#End ExternalSource
 #ExternalSource("HumanVsComputer.feature",25)
- testRunner.Then("the value of index 1 should be X")
+ testRunner.Given("I have a new game")
 #End ExternalSource
 #ExternalSource("HumanVsComputer.feature",26)
- testRunner.And("the date of index 1 should be 1/21/2012")
+ testRunner.And("I have selected a computer opponent")
 #End ExternalSource
 #ExternalSource("HumanVsComputer.feature",27)
- testRunner.And("the player of index 1 should be me")
+ testRunner.And("I selected to go first")
 #End ExternalSource
 #ExternalSource("HumanVsComputer.feature",28)
+ testRunner.And("it is my turn")
+#End ExternalSource
+#ExternalSource("HumanVsComputer.feature",29)
+ testRunner.And("no indeces are marked")
+#End ExternalSource
+#ExternalSource("HumanVsComputer.feature",30)
+ testRunner.When("index 1 is marked")
+#End ExternalSource
+#ExternalSource("HumanVsComputer.feature",31)
+ testRunner.Then("the value of index 1 should be X")
+#End ExternalSource
+#ExternalSource("HumanVsComputer.feature",32)
+ testRunner.And("the date of index 1 should be 1/21/2012")
+#End ExternalSource
+#ExternalSource("HumanVsComputer.feature",33)
+ testRunner.And("the player of index 1 should be me")
+#End ExternalSource
+#ExternalSource("HumanVsComputer.feature",34)
  testRunner.And("the invoker should be the opponent")
 #End ExternalSource
             Me.ScenarioCleanup
