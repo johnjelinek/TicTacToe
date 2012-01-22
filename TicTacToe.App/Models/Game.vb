@@ -9,7 +9,7 @@ Namespace TicTacToe.App.Models
         ReadOnly Property Invoker As Player
         ReadOnly Property FirstInvoker As Player
         ReadOnly Property GameBoard As Array
-        ReadOnly Property Marks As List(Of GameIndex)
+        ReadOnly Property MarksAvailable As List(Of Integer)
 
         Sub Start()
         Sub Start(protagonist As Player, antagonist As Player)

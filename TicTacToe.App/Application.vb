@@ -27,6 +27,7 @@ Module Application
                     makeYourMove(game)
                     Console.WriteLine()
                 Loop
+                showTheBoard(game)
                 Console.WriteLine("Game Over")
             Case TicTacToe.App.Models.GameState.InProgress
                 Console.WriteLine("Game is in progress")
@@ -91,8 +92,7 @@ Module Application
                 Console.WriteLine("Invalid Choice" & vbNewLine)
             End If
         ElseIf TypeOf game.Invoker Is Computer Then
-            ' Which spots are available?
-            game.Mark(5)
+            game.Mark(game.MarksAvailable.FirstOrDefault())
             game.SwitchPlayers()
         End If
     End Sub
@@ -100,13 +100,13 @@ Module Application
     Private Sub showTheBoard(game As Game)
         For index = 1 To game.GameBoard.Length
             If index Mod 3 Then
-                If CType(game.GameBoard(index - 1), GameIndex) Is Nothing Then
+                If game.MarksAvailable.Contains(index - 1) Then
                     Console.Write(index)
                 Else
                     Console.Write(CType(game.GameBoard(index - 1), GameIndex).Value)
                 End If
             Else
-                If CType(game.GameBoard(index - 1), GameIndex) Is Nothing Then
+                If game.MarksAvailable.Contains(index - 1) Then
                     Console.WriteLine(index)
                 Else
                     Console.WriteLine(CType(game.GameBoard(index - 1), GameIndex).Value)

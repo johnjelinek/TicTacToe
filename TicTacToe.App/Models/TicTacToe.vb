@@ -46,15 +46,15 @@ Namespace TicTacToe.App.Models
                 Return plays.OrderBy(Function(move) move.DateTimeStamp).FirstOrDefault.Player
             End Get
         End Property
-        ReadOnly Property Marks As List(Of GameIndex) Implements Game.Marks
+        ReadOnly Property MarksAvailable As List(Of Integer) Implements Game.MarksAvailable
             Get
-                Dim positions As New List(Of GameIndex)
-                For Each position In GameBoard
-                    If position IsNot Nothing Then
-                        positions.Add(position)
+                Dim availableIndeces As New List(Of Integer)
+                For index = 1 To GameBoard.Length
+                    If GameBoard(index - 1) Is Nothing Then
+                        availableIndeces.Add(index - 1)
                     End If
                 Next
-                Return positions
+                Return availableIndeces
             End Get
         End Property
 
@@ -82,7 +82,7 @@ Namespace TicTacToe.App.Models
                     Else
                         _gameBoard(index) = New GameIndex With {.Player = Invoker, .DateTimeStamp = Now, .Value = "O"}
                     End If
-                    If Marks.Count = _gameBoard.Length Then
+                    If (_gameBoard.Length - MarksAvailable.Count) = _gameBoard.Length Then
                         _state = GameState.Finished
                     End If
             End Select
@@ -103,6 +103,7 @@ Namespace TicTacToe.App.Models
         Public Sub SwitchPlayers(ByRef player As Player) Implements Game.SwitchPlayers
             _invoker = player
         End Sub
+
     End Class
 
 End Namespace
