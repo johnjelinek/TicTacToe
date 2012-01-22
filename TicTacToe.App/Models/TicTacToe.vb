@@ -3,9 +3,10 @@ Namespace TicTacToe.App.Models
     Public Class TicTacToe
         Implements Game
 
+        Private _antagonist As Player
         Private _gameBoard(8) As GameIndex
         Private _invoker As Player
-        Private _antagonist As Player
+        Private _name As String
         Private _protagonist As Player
         Private _state As GameState
 
@@ -14,7 +15,11 @@ Namespace TicTacToe.App.Models
                 Return _state
             End Get
         End Property
-        Property Name As String Implements Game.Name
+        ReadOnly Property Name As String Implements Game.Name
+            Get
+                Return _name
+            End Get
+        End Property
         ReadOnly Property Protagonist As Player Implements Game.Protagonist
             Get
                 Return _protagonist
@@ -85,13 +90,54 @@ Namespace TicTacToe.App.Models
                     End If
                 End If
                 ' 3 Horizontally
-                ' 3 Diagonally
+                If Not MarksAvailable.Contains(1) _
+                    AndAlso Not MarksAvailable.Contains(2) _
+                    AndAlso Not MarksAvailable.Contains(3) Then
+                    If CType(GameBoard(0), GameIndex).Value = CType(GameBoard(1), GameIndex).Value _
+                    AndAlso CType(GameBoard(1), GameIndex).Value = CType(GameBoard(2), GameIndex).Value Then
+                        Return True
+                    End If
+                End If
+                If Not MarksAvailable.Contains(4) _
+                    AndAlso Not MarksAvailable.Contains(5) _
+                    AndAlso Not MarksAvailable.Contains(6) Then
+                    If CType(GameBoard(3), GameIndex).Value = CType(GameBoard(4), GameIndex).Value _
+                    AndAlso CType(GameBoard(4), GameIndex).Value = CType(GameBoard(5), GameIndex).Value Then
+                        Return True
+                    End If
+                End If
+                If Not MarksAvailable.Contains(7) _
+                    AndAlso Not MarksAvailable.Contains(8) _
+                    AndAlso Not MarksAvailable.Contains(9) Then
+                    If CType(GameBoard(6), GameIndex).Value = CType(GameBoard(7), GameIndex).Value _
+                    AndAlso CType(GameBoard(7), GameIndex).Value = CType(GameBoard(8), GameIndex).Value Then
+                        Return True
+                    End If
+                End If
+                ' 3 Diagonally \
+                If Not MarksAvailable.Contains(1) _
+                    AndAlso Not MarksAvailable.Contains(5) _
+                    AndAlso Not MarksAvailable.Contains(9) Then
+                    If CType(GameBoard(0), GameIndex).Value = CType(GameBoard(4), GameIndex).Value _
+                    AndAlso CType(GameBoard(4), GameIndex).Value = CType(GameBoard(8), GameIndex).Value Then
+                        Return True
+                    End If
+                End If
+                ' 3 Diagonally /
+                If Not MarksAvailable.Contains(3) _
+                    AndAlso Not MarksAvailable.Contains(5) _
+                    AndAlso Not MarksAvailable.Contains(7) Then
+                    If CType(GameBoard(2), GameIndex).Value = CType(GameBoard(4), GameIndex).Value _
+                    AndAlso CType(GameBoard(4), GameIndex).Value = CType(GameBoard(6), GameIndex).Value Then
+                        Return True
+                    End If
+                End If
                 Return False
             End Get
         End Property
 
         Sub New()
-            Name = "Tic Tac Toe"
+            _name = "Tic Tac Toe"
         End Sub
 
         Sub Start() Implements Game.Start
