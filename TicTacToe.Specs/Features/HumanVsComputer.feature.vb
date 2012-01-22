@@ -162,6 +162,46 @@ Me.ScenarioSetup(scenarioInfo)
 #End ExternalSource
             Me.ScenarioCleanup
         End Sub
+        
+        <NUnit.Framework.TestAttribute(),  _
+         NUnit.Framework.DescriptionAttribute("I want to win")>  _
+        Public Overridable Sub IWantToWin()
+            Dim scenarioInfo As TechTalk.SpecFlow.ScenarioInfo = New TechTalk.SpecFlow.ScenarioInfo("I want to win", CType(Nothing,String()))
+#ExternalSource("HumanVsComputer.feature",36)
+Me.ScenarioSetup(scenarioInfo)
+#End ExternalSource
+#ExternalSource("HumanVsComputer.feature",37)
+ testRunner.Given("I have a new game")
+#End ExternalSource
+#ExternalSource("HumanVsComputer.feature",38)
+ testRunner.And("I have selected a computer opponent")
+#End ExternalSource
+#ExternalSource("HumanVsComputer.feature",39)
+ testRunner.And("I selected to go first")
+#End ExternalSource
+#ExternalSource("HumanVsComputer.feature",40)
+ testRunner.And("it is my turn")
+#End ExternalSource
+#ExternalSource("HumanVsComputer.feature",41)
+ testRunner.And("I marked index 0")
+#End ExternalSource
+#ExternalSource("HumanVsComputer.feature",42)
+ testRunner.And("computer marked index 1")
+#End ExternalSource
+#ExternalSource("HumanVsComputer.feature",43)
+ testRunner.And("I marked index 3")
+#End ExternalSource
+#ExternalSource("HumanVsComputer.feature",44)
+ testRunner.And("computer marked index 4")
+#End ExternalSource
+#ExternalSource("HumanVsComputer.feature",45)
+ testRunner.When("index 6 is marked")
+#End ExternalSource
+#ExternalSource("HumanVsComputer.feature",46)
+ testRunner.Then("the gamestate should be Finished")
+#End ExternalSource
+            Me.ScenarioCleanup
+        End Sub
     End Class
 End Namespace
 '#pragma warning restore

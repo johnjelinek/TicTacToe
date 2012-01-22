@@ -10,11 +10,11 @@ Namespace TicTacToe.App.Models
         ReadOnly Property FirstInvoker As Player
         ReadOnly Property GameBoard As Array
         ReadOnly Property MarksAvailable As List(Of Integer)
+        ReadOnly Property SomeoneWins As Boolean
 
         Sub Start()
         Sub Start(protagonist As Player, antagonist As Player)
         Sub Mark(index As Integer)
-        Sub SelectOpponent(ByRef player As Player)
         Sub SwitchPlayers()
         Sub SwitchPlayers(ByRef player As Player)
 

@@ -48,13 +48,45 @@ Namespace TicTacToe.App.Models
         End Property
         ReadOnly Property MarksAvailable As List(Of Integer) Implements Game.MarksAvailable
             Get
-                Dim availableIndeces As New List(Of Integer)
-                For index = 1 To GameBoard.Length
-                    If GameBoard(index - 1) Is Nothing Then
-                        availableIndeces.Add(index - 1)
+                Dim availablePositions As New List(Of Integer)
+                For markPosition = 1 To GameBoard.Length
+                    If GameBoard(markPosition - 1) Is Nothing Then
+                        availablePositions.Add(markPosition)
                     End If
                 Next
-                Return availableIndeces
+                Return availablePositions
+            End Get
+        End Property
+        ReadOnly Property SomeoneWins As Boolean Implements Game.SomeoneWins
+            Get
+                ' 3 Vertically
+                If Not MarksAvailable.Contains(1) _
+                    AndAlso Not MarksAvailable.Contains(4) _
+                    AndAlso Not MarksAvailable.Contains(7) Then
+                    If CType(GameBoard(0), GameIndex).Value = CType(GameBoard(3), GameIndex).Value _
+                    AndAlso CType(GameBoard(3), GameIndex).Value = CType(GameBoard(6), GameIndex).Value Then
+                        Return True
+                    End If
+                End If
+                If Not MarksAvailable.Contains(2) _
+                    AndAlso Not MarksAvailable.Contains(5) _
+                    AndAlso Not MarksAvailable.Contains(8) Then
+                    If CType(GameBoard(1), GameIndex).Value = CType(GameBoard(4), GameIndex).Value _
+                    AndAlso CType(GameBoard(4), GameIndex).Value = CType(GameBoard(7), GameIndex).Value Then
+                        Return True
+                    End If
+                End If
+                If Not MarksAvailable.Contains(3) _
+                    AndAlso Not MarksAvailable.Contains(6) _
+                    AndAlso Not MarksAvailable.Contains(9) Then
+                    If CType(GameBoard(2), GameIndex).Value = CType(GameBoard(5), GameIndex).Value _
+                    AndAlso CType(GameBoard(5), GameIndex).Value = CType(GameBoard(8), GameIndex).Value Then
+                        Return True
+                    End If
+                End If
+                ' 3 Horizontally
+                ' 3 Diagonally
+                Return False
             End Get
         End Property
 
@@ -82,14 +114,15 @@ Namespace TicTacToe.App.Models
                     Else
                         _gameBoard(index) = New GameIndex With {.Player = Invoker, .DateTimeStamp = Now, .Value = "O"}
                     End If
+                    ' Wins
+                    If SomeoneWins Then
+                        _state = GameState.Finished
+                    End If
+                    ' Tie
                     If (_gameBoard.Length - MarksAvailable.Count) = _gameBoard.Length Then
                         _state = GameState.Finished
                     End If
             End Select
-        End Sub
-
-        Public Sub SelectOpponent(ByRef player As Player) Implements Game.SelectOpponent
-            _antagonist = player
         End Sub
 
         Public Sub SwitchPlayers() Implements Game.SwitchPlayers

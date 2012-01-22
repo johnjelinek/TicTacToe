@@ -32,3 +32,15 @@ Scenario: I make a mark
 	And the date of index 1 should be 1/22/2012
 	And the player of index 1 should be me
 	And the invoker should be the opponent
+
+Scenario: I want to win
+	Given I have a new game
+	And I have selected a computer opponent
+	And I selected to go first
+	And it is my turn
+	And I marked index 0
+	And computer marked index 1
+	And I marked index 3
+	And computer marked index 4
+	When index 6 is marked
+	Then the gamestate should be Finished

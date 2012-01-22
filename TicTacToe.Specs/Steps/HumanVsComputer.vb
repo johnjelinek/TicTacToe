@@ -19,7 +19,7 @@ Namespace TicTacToe.Specs.Steps
                 Case Else
                     ScenarioContext.Current.Add("antagonist", New Human)
             End Select
-            ScenarioContext.Current.Get(Of Game)("game").SelectOpponent(ScenarioContext.Current.Get(Of Player)("antagonist"))
+            ScenarioContext.Current.Get(Of Game)("game").Start(ScenarioContext.Current.Get(Of Player)("protagonist"), ScenarioContext.Current.Get(Of Player)("antagonist"))
         End Sub
 
         <[Given]("I have a new game")> _
@@ -30,7 +30,7 @@ Namespace TicTacToe.Specs.Steps
 
         <[Given]("it is my turn")> _
         Public Sub GivenItIsMyTurn()
-            ScenarioContext.Current.Get(Of Game)("game").Invoker.Should.Be(ScenarioContext.Current.Get(Of Player)("protagonist"))
+            ScenarioContext.Current.Get(Of Game)("game").Invoker.Should.BeOfType(Of Human)()
         End Sub
 
         <[Given]("no indeces are marked")> _
@@ -41,6 +41,17 @@ Namespace TicTacToe.Specs.Steps
         <[Given]("I selected to go (.*)")> _
         Public Sub GivenISelectedToGo(ByVal turn As String)
             WhenISelectToGo("first")
+        End Sub
+
+        <[Given]("(.*) marked index (.*)")> _
+        Public Sub GivenIMarkedIndex(ByVal player As String, ByVal index As Integer)
+            Select Case player
+                Case "I"
+                    WhenIndexIsMarked(index)
+                Case "computer"
+                    Threading.Thread.Sleep(1000)
+                    WhenIndexIsMarked(index)
+            End Select
         End Sub
 
         <[When]("I press start")> _

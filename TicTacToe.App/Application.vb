@@ -21,6 +21,10 @@ Module Application
                 Do Until whoIsFirst(game) > 0
                     whoIsFirst(game)
                 Loop
+                If game.Invoker Is game.Antagonist Then
+                    makeYourMove(game)
+                    Console.WriteLine()
+                End If
                 Do Until game.State = GameState.Finished
                     showTheBoard(game)
                     Console.WriteLine()
@@ -92,7 +96,9 @@ Module Application
                 Console.WriteLine("Invalid Choice" & vbNewLine)
             End If
         ElseIf TypeOf game.Invoker Is Computer Then
-            game.Mark(game.MarksAvailable.FirstOrDefault())
+            Console.WriteLine("Computer is thinking")
+            Threading.Thread.Sleep(1000)
+            game.Mark(game.MarksAvailable.FirstOrDefault() - 1)
             game.SwitchPlayers()
         End If
     End Sub
@@ -100,13 +106,13 @@ Module Application
     Private Sub showTheBoard(game As Game)
         For index = 1 To game.GameBoard.Length
             If index Mod 3 Then
-                If game.MarksAvailable.Contains(index - 1) Then
+                If game.MarksAvailable.Contains(index) Then
                     Console.Write(index)
                 Else
                     Console.Write(CType(game.GameBoard(index - 1), GameIndex).Value)
                 End If
             Else
-                If game.MarksAvailable.Contains(index - 1) Then
+                If game.MarksAvailable.Contains(index) Then
                     Console.WriteLine(index)
                 Else
                     Console.WriteLine(CType(game.GameBoard(index - 1), GameIndex).Value)
