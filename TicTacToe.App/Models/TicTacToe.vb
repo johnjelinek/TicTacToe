@@ -35,6 +35,28 @@ Namespace TicTacToe.App.Models
                 Return _gameBoard
             End Get
         End Property
+        ReadOnly Property FirstInvoker As Player Implements Game.FirstInvoker
+            Get
+                Dim plays As New List(Of GameIndex)
+                For Each index As GameIndex In GameBoard
+                    If index IsNot Nothing Then
+                        plays.Add(index)
+                    End If
+                Next
+                Return plays.OrderBy(Function(move) move.DateTimeStamp).FirstOrDefault.Player
+            End Get
+        End Property
+        ReadOnly Property Marks As List(Of GameIndex) Implements Game.Marks
+            Get
+                Dim positions As New List(Of GameIndex)
+                For Each position In GameBoard
+                    If position IsNot Nothing Then
+                        positions.Add(position)
+                    End If
+                Next
+                Return positions
+            End Get
+        End Property
 
         Sub New()
             Name = "Tic Tac Toe"
@@ -51,15 +73,18 @@ Namespace TicTacToe.App.Models
 
         Public Sub Mark(index As Integer) Implements Game.Mark
             Select Case State
+                Case GameState.Created
+                    _gameBoard(index) = New GameIndex With {.Player = Invoker, .DateTimeStamp = Now, .Value = "X"}
+                    _state = GameState.InProgress
                 Case GameState.InProgress
-                    If _gameBoard.OrderBy(Function(marks) marks.DateTimeStamp).FirstOrDefault.Player Is Invoker Then
+                    If Invoker Is FirstInvoker Then
                         _gameBoard(index) = New GameIndex With {.Player = Invoker, .DateTimeStamp = Now, .Value = "X"}
                     Else
                         _gameBoard(index) = New GameIndex With {.Player = Invoker, .DateTimeStamp = Now, .Value = "O"}
                     End If
-                Case Else
-                    _gameBoard(index) = New GameIndex With {.Player = Invoker, .DateTimeStamp = Now, .Value = "X"}
-                    _state = GameState.InProgress
+                    If Marks.Count = _gameBoard.Length Then
+                        _state = GameState.Finished
+                    End If
             End Select
         End Sub
 

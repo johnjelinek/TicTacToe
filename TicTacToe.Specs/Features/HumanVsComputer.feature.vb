@@ -152,7 +152,7 @@ Me.ScenarioSetup(scenarioInfo)
  testRunner.Then("the value of index 1 should be X")
 #End ExternalSource
 #ExternalSource("HumanVsComputer.feature",32)
- testRunner.And("the date of index 1 should be 1/21/2012")
+ testRunner.And("the date of index 1 should be 1/22/2012")
 #End ExternalSource
 #ExternalSource("HumanVsComputer.feature",33)
  testRunner.And("the player of index 1 should be me")

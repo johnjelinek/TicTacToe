@@ -29,6 +29,6 @@ Scenario: I make a mark
 	And no indeces are marked
 	When index 1 is marked
 	Then the value of index 1 should be X
-	And the date of index 1 should be 1/21/2012
+	And the date of index 1 should be 1/22/2012
 	And the player of index 1 should be me
 	And the invoker should be the opponent
