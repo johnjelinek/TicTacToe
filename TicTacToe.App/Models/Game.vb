@@ -12,6 +12,7 @@ Namespace TicTacToe.App.Models
         ReadOnly Property Protagonist As Player
         ReadOnly Property SomeoneWins As Boolean
         ReadOnly Property State As GameState
+        ReadOnly Property LastMark As GameIndex
 
         Sub Mark(index As Integer)
         Sub Start()

@@ -135,6 +135,44 @@ Namespace TicTacToe.App.Models
                 Return False
             End Get
         End Property
+        ReadOnly Property LastMark As GameIndex Implements Game.LastMark
+            Get
+                Dim plays As New List(Of GameIndex)
+                For Each index As GameIndex In GameBoard
+                    If index IsNot Nothing Then
+                        plays.Add(index)
+                    End If
+                Next
+                Return plays.OrderByDescending(Function(mark) mark.DateTimeStamp).FirstOrDefault
+            End Get
+        End Property
+        ReadOnly Property Corners As List(Of Integer)
+            Get
+                Dim positions As New List(Of Integer)
+                positions.Add(1)
+                positions.Add(3)
+                positions.Add(7)
+                positions.Add(9)
+                Return positions
+            End Get
+        End Property
+        ReadOnly Property Edges As List(Of Integer)
+            Get
+                Dim positions As New List(Of Integer)
+                positions.Add(2)
+                positions.Add(4)
+                positions.Add(6)
+                positions.Add(8)
+                Return positions
+            End Get
+        End Property
+        ReadOnly Property Center As List(Of Integer)
+            Get
+                Dim position As New List(Of Integer)
+                position.Add(5)
+                Return position
+            End Get
+        End Property
 
         Sub New()
             _name = "Tic Tac Toe"
