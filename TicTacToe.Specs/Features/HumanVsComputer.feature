@@ -29,7 +29,7 @@ Scenario: I make a mark
 	And no indeces are marked
 	When index 1 is marked
 	Then the value of index 1 should be X
-	And the date of index 1 should be 1/22/2012
+	And the date of index 1 should be 1/23/2012
 	And the player of index 1 should be me
 	And the invoker should be the opponent
 
@@ -44,3 +44,12 @@ Scenario: I want to win
 	And computer marked index 4
 	When index 6 is marked
 	Then the gamestate should be Finished
+
+Scenario: I want to make sure my spot cannot be taken
+	Given I have a new game
+	And I have selected a computer opponent
+	And I selected to go first
+	And it is my turn
+	And I marked index 0
+	And computer marked index 0
+	Then the value of index 0 should be X

@@ -47,10 +47,16 @@ Namespace TicTacToe.Specs.Steps
         Public Sub GivenIMarkedIndex(ByVal player As String, ByVal index As Integer)
             Select Case player
                 Case "I"
-                    WhenIndexIsMarked(index)
+                    Try
+                        WhenIndexIsMarked(index)
+                    Catch ex As InvalidOperationException
+                    End Try
                 Case "computer"
                     Threading.Thread.Sleep(1000)
-                    WhenIndexIsMarked(index)
+                    Try
+                        WhenIndexIsMarked(index)
+                    Catch ex As InvalidOperationException
+                    End Try
             End Select
         End Sub
 

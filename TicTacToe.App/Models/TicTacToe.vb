@@ -155,10 +155,14 @@ Namespace TicTacToe.App.Models
                     _gameBoard(index) = New GameIndex With {.Player = Invoker, .DateTimeStamp = Now, .Value = "X"}
                     _state = GameState.InProgress
                 Case GameState.InProgress
-                    If Invoker Is FirstInvoker Then
-                        _gameBoard(index) = New GameIndex With {.Player = Invoker, .DateTimeStamp = Now, .Value = "X"}
+                    If MarksAvailable.Contains(index + 1) Then
+                        If Invoker Is FirstInvoker Then
+                            _gameBoard(index) = New GameIndex With {.Player = Invoker, .DateTimeStamp = Now, .Value = "X"}
+                        Else
+                            _gameBoard(index) = New GameIndex With {.Player = Invoker, .DateTimeStamp = Now, .Value = "O"}
+                        End If
                     Else
-                        _gameBoard(index) = New GameIndex With {.Player = Invoker, .DateTimeStamp = Now, .Value = "O"}
+                        Throw New InvalidOperationException("Unable to mark that spot")
                     End If
                     ' Wins
                     If SomeoneWins Then

@@ -74,9 +74,11 @@ Module Application
         Select Case Console.ReadLine
             Case "1"
                 game.SwitchPlayers(game.Antagonist)
+                Console.WriteLine("Computer is ""X"" and You are ""O""")
                 Return 1
             Case "2"
                 game.SwitchPlayers(game.Protagonist)
+                Console.WriteLine("You are ""X"" and Computer is ""O""")
                 Return 1
             Case Else
                 Console.WriteLine("Invalid Choice" & vbNewLine)
@@ -90,16 +92,26 @@ Module Application
             Console.Write("Pick a number on the board: ")
             Dim input As Integer
             If Integer.TryParse(Console.ReadLine, input) Then
-                game.Mark(input - 1)
-                game.SwitchPlayers()
+                Try
+                    game.Mark(input - 1)
+                    game.SwitchPlayers()
+                Catch ex As InvalidOperationException
+                    Console.WriteLine(vbNewLine & ex.Message & vbNewLine)
+                    makeYourMove(game)
+                End Try
             Else
                 Console.WriteLine("Invalid Choice" & vbNewLine)
             End If
         ElseIf TypeOf game.Invoker Is Computer Then
             Console.WriteLine("Computer is thinking")
             Threading.Thread.Sleep(1000)
-            game.Mark(game.MarksAvailable.FirstOrDefault() - 1)
-            game.SwitchPlayers()
+            Try
+                game.Mark(game.MarksAvailable.FirstOrDefault() - 1)
+                game.SwitchPlayers()
+            Catch ex As InvalidOperationException
+                Console.WriteLine(vbNewLine & ex.Message & vbNewLine)
+                makeYourMove(game)
+            End Try
         End If
     End Sub
 

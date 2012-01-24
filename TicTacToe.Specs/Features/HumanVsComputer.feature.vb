@@ -152,7 +152,7 @@ Me.ScenarioSetup(scenarioInfo)
  testRunner.Then("the value of index 1 should be X")
 #End ExternalSource
 #ExternalSource("HumanVsComputer.feature",32)
- testRunner.And("the date of index 1 should be 1/22/2012")
+ testRunner.And("the date of index 1 should be 1/23/2012")
 #End ExternalSource
 #ExternalSource("HumanVsComputer.feature",33)
  testRunner.And("the player of index 1 should be me")
@@ -199,6 +199,37 @@ Me.ScenarioSetup(scenarioInfo)
 #End ExternalSource
 #ExternalSource("HumanVsComputer.feature",46)
  testRunner.Then("the gamestate should be Finished")
+#End ExternalSource
+            Me.ScenarioCleanup
+        End Sub
+        
+        <NUnit.Framework.TestAttribute(),  _
+         NUnit.Framework.DescriptionAttribute("I want to make sure my spot cannot be taken")>  _
+        Public Overridable Sub IWantToMakeSureMySpotCannotBeTaken()
+            Dim scenarioInfo As TechTalk.SpecFlow.ScenarioInfo = New TechTalk.SpecFlow.ScenarioInfo("I want to make sure my spot cannot be taken", CType(Nothing,String()))
+#ExternalSource("HumanVsComputer.feature",48)
+Me.ScenarioSetup(scenarioInfo)
+#End ExternalSource
+#ExternalSource("HumanVsComputer.feature",49)
+ testRunner.Given("I have a new game")
+#End ExternalSource
+#ExternalSource("HumanVsComputer.feature",50)
+ testRunner.And("I have selected a computer opponent")
+#End ExternalSource
+#ExternalSource("HumanVsComputer.feature",51)
+ testRunner.And("I selected to go first")
+#End ExternalSource
+#ExternalSource("HumanVsComputer.feature",52)
+ testRunner.And("it is my turn")
+#End ExternalSource
+#ExternalSource("HumanVsComputer.feature",53)
+ testRunner.And("I marked index 0")
+#End ExternalSource
+#ExternalSource("HumanVsComputer.feature",54)
+ testRunner.And("computer marked index 0")
+#End ExternalSource
+#ExternalSource("HumanVsComputer.feature",55)
+ testRunner.Then("the value of index 0 should be X")
 #End ExternalSource
             Me.ScenarioCleanup
         End Sub
