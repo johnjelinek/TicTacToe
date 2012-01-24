@@ -9,6 +9,14 @@ Namespace TicTacToe.App.Models
         Private _name As String
         Private _protagonist As Player
         Private _state As GameState
+        Private _canWin As Boolean
+        Private _canBlock As Boolean
+        Private _canFork As Boolean
+        Private _canBlockFork As Boolean
+        Private _canPlayCenter As Boolean
+        Private _canPlayOppositeCorner As Boolean
+        Private _canPlayEmptyCorner As Boolean
+        Private _canPlayEmptyEdge As Boolean
 
         ReadOnly Property State As GameState Implements Game.State
             Get
@@ -171,6 +179,46 @@ Namespace TicTacToe.App.Models
                 Dim position As New List(Of Integer)
                 position.Add(5)
                 Return position
+            End Get
+        End Property
+        ReadOnly Property CanWin(player As Player) As Boolean
+            Get
+                Return _canWin
+            End Get
+        End Property
+        ReadOnly Property CanBlock(player As Player) As Boolean
+            Get
+                Return _canBlock
+            End Get
+        End Property
+        ReadOnly Property CanFork(player As Player) As Boolean
+            Get
+                Return _canFork
+            End Get
+        End Property
+        ReadOnly Property CanBlockFork(player As Player) As Boolean
+            Get
+                Return _canBlockFork
+            End Get
+        End Property
+        ReadOnly Property CanPlayCenter(player As Player) As Boolean
+            Get
+                Return _canPlayCenter
+            End Get
+        End Property
+        ReadOnly Property CanPlayOppositeCorner(player As Player) As Boolean
+            Get
+                Return _canPlayOppositeCorner
+            End Get
+        End Property
+        ReadOnly Property CanPlayEmptyCorner(player As Player) As Boolean
+            Get
+                Return _canPlayEmptyCorner
+            End Get
+        End Property
+        ReadOnly Property CanPlayEmptyEdge(player As Player) As Boolean
+            Get
+                Return _canPlayEmptyEdge
             End Get
         End Property
 

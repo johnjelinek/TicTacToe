@@ -106,7 +106,7 @@ Module Application
             Console.WriteLine("Computer is thinking")
             Threading.Thread.Sleep(1000)
             Try
-                game.Mark(game.MarksAvailable.FirstOrDefault() - 1)
+                game.Mark(calculateMark(game) - 1)
                 game.SwitchPlayers()
             Catch ex As InvalidOperationException
                 Console.WriteLine(vbNewLine & ex.Message & vbNewLine)
@@ -132,5 +132,44 @@ Module Application
             End If
         Next
     End Sub
+
+    Private Function calculateMark(game As TicTacToe.App.Models.TicTacToe) As Integer
+        If TypeOf game.Invoker Is Computer Then
+            'Strategy:
+            'Win: If the player has two in a row, play the third to get three in a row.
+            If game.CanWin(game.Invoker) Then
+
+            End If
+            'Block: If the [opponent] has two in a row, play the third to block them.
+            If game.CanBlock(game.Invoker) Then
+
+            End If
+            'Fork: Create an opportunity where you can win in two ways.
+            If game.CanFork(game.Invoker) Then
+
+            End If
+            'Block opponent's Fork:
+            If game.CanBlockFork(game.Invoker) Then
+                '   Option 1: Create two in a row to force the opponent into defending, as long as it doesn't result in them creating a fork or winning. For example, if "X" has a corner, "O" has the center, and "X" has the opposite corner as well, "O" must not play a corner in order to win. (Playing a corner in this scenario creates a fork for "X" to win.)
+                '   Option 2: If there is a configuration where the opponent can fork, block that fork.
+            End If
+            'Center: Play the center.
+            If game.CanPlayCenter(game.Invoker) Then
+
+            End If
+            'Opposite corner: If the opponent is in the corner, play the opposite corner.
+            If game.CanPlayOppositeCorner(game.Invoker) Then
+
+            End If
+            'Empty corner: Play in a corner square.
+            If game.CanPlayEmptyCorner(game.Invoker) Then
+
+            End If
+            'Empty side: Play in a middle square on any of the 4 sides.
+            If game.CanPlayEmptyEdge(game.Invoker) Then
+
+            End If
+        End If
+    End Function
 
 End Module
